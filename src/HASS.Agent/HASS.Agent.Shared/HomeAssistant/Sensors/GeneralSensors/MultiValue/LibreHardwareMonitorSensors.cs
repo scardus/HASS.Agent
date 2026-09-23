@@ -313,10 +313,10 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         if (!match.Success)
             return false;
 
-        // LibreHardwareMonitor formats its values using the culture it runs under, normally ours as well
-        var number = match.Groups[1].Value;
-        if (!double.TryParse(number, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.CurrentCulture, out value)
-            && !double.TryParse(number, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out value))
+        // LibreHardwareMonitor formats its values using the culture it runs under, which needn't be
+        // ours, but it never groups digits, so a comma or full stop is always the decimal separator
+        var number = match.Groups[1].Value.Replace(',', '.');
+        if (!double.TryParse(number, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
             return false;
 
         if (!double.IsFinite(value))
