@@ -123,8 +123,10 @@ namespace HASS.Agent.Functions
                 var libreHardwareMonitorSensors = new LibreHardwareMonitorSensors(null, null, null, endpointUrl, sensorTypes);
 
                 // the status sensor is always present, so it's not one of the discovered sensors
-                var sensors = libreHardwareMonitorSensors.Sensors.Values
-                    .Where(sensor => !sensor.EntityName.EndsWith(LibreHardwareMonitorSensors.StatusEntitySuffix))
+                var statusId = $"{libreHardwareMonitorSensors.Id}{LibreHardwareMonitorSensors.StatusEntitySuffix}";
+                var sensors = libreHardwareMonitorSensors.Sensors
+                    .Where(sensor => sensor.Key != statusId)
+                    .Select(sensor => sensor.Value)
                     .OrderBy(sensor => sensor.Name)
                     .ToList();
 
