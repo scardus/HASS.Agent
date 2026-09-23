@@ -48,7 +48,7 @@ public static class HttpJsonManager
         // only one caller fetches a given url at a time, the rest use its result
         lock (cached)
         {
-            if (cached.FetchedAt.Add(CacheDuration) < DateTime.Now)
+            if (cached.FetchedAt.Add(CacheDuration) < DateTime.UtcNow)
                 Fetch(url, cached);
 
             document = cached.Document;
@@ -60,7 +60,7 @@ public static class HttpJsonManager
 
     private static void Fetch(string url, CachedDocument cached)
     {
-        cached.FetchedAt = DateTime.Now;
+        cached.FetchedAt = DateTime.UtcNow;
 
         try
         {

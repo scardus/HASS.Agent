@@ -370,10 +370,10 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     /// <param name="ignored"></param>
     private void LogEntityLimitReached(int ignored)
     {
-        if ((DateTime.Now - _lastEntityLimitLogged).TotalMinutes < 5)
+        if ((DateTime.UtcNow - _lastEntityLimitLogged).TotalMinutes < 5)
             return;
 
-        _lastEntityLimitLogged = DateTime.Now;
+        _lastEntityLimitLogged = DateTime.UtcNow;
 
         Log.Warning("[LIBREHARDWAREMONITOR] [{name}] Entity limit of {max} reached, {count} sensor(s) ignored (won't report again for 5 minutes)", EntityName, MaxEntities, ignored);
     }
