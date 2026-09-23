@@ -1,4 +1,4 @@
-﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Satellite.Service.Extensions;
 using HASS.Agent.Shared.HomeAssistant.Sensors;
