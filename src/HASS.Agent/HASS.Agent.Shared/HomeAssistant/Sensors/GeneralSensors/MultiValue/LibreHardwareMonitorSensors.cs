@@ -417,8 +417,6 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         return TypeMappings.TryGetValue(sensorType, out var mapping) ? mapping : UnknownTypeMapping;
     }
 
-
-
     /// <summary>
     /// Announces sensors that appeared after the initial autodiscovery round, which would
     /// otherwise publish their state without Home Assistant having a configuration for them
@@ -467,7 +465,6 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             StateClass = stateClass;
         }
     }
-
 
     private sealed class Reading
     {
